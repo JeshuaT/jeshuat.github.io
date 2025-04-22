@@ -1,1 +1,209 @@
-Hallo Marjolein!
+<!DOCTYPE html>
+<html lang="en" x-data="app" x-init="init()">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <!-- Tailwind CSS with dark-mode enabled -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {} }
+    }
+  </script>
+  <!-- Alpine.js for data-binding -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+  <!-- Dark mode toggle - Position changes based on screen size -->
+  <button
+    @click="dark = !dark; document.documentElement.classList.toggle('dark', dark)"
+    class="fixed md:top-4 md:right-4 bottom-4 right-4 p-2 bg-white dark:bg-gray-800 rounded-full shadow flex items-center justify-center w-10 h-10 z-20"
+    x-data="{ dark: false }">
+    <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+    <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    </svg>
+  </button>
+
+  <!-- Sidebar/Profile - Hidden on small screens, visible on medium screens and up -->
+  <aside class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 p-6 shadow-lg overflow-auto hidden md:block">
+    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+      <img :src="profile.photo" alt="Photo" class="w-full h-full object-cover" />
+    </div>
+    <h1 class="text-2xl font-bold text-center" x-text="profile.name"></h1>
+    <p class="text-center text-gray-600 dark:text-gray-400 mb-4" x-text="profile.title"></p>
+    <nav class="space-y-2">
+      <a href="#about" @click="activeSection = 'about'" class="block hover:underline" :class="{'font-bold': activeSection === 'about'}">About</a>
+      <a href="#projects" @click="activeSection = 'projects'" class="block hover:underline" :class="{'font-bold': activeSection === 'projects'}">Projects</a>
+      <a href="#publications" @click="activeSection = 'publications'" class="block hover:underline" :class="{'font-bold': activeSection === 'publications'}">Publications</a>
+      <a href="#contact" @click="activeSection = 'contact'" class="block hover:underline" :class="{'font-bold': activeSection === 'contact'}">Contact</a>
+    </nav>
+  </aside>
+
+  <!-- Mobile header - Visible only on small screens -->
+  <header class="bg-white dark:bg-gray-800 shadow-md p-4 flex items-center justify-between md:hidden">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-full overflow-hidden">
+        <img :src="profile.photo" alt="Photo" class="w-full h-full object-cover" />
+      </div>
+      <h1 class="text-lg font-bold" x-text="profile.name"></h1>
+    </div>
+    <div x-data="{ mobileMenuOpen: false }">
+      <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <nav x-show="mobileMenuOpen"
+           x-transition
+           class="absolute top-16 right-0 left-0 bg-white dark:bg-gray-800 shadow-md p-4 z-10">
+        <div class="flex flex-col space-y-2">
+          <a href="#about" @click="activeSection = 'about'; mobileMenuOpen = false" class="block hover:underline py-2" :class="{'font-bold': activeSection === 'about'}">About</a>
+          <a href="#projects" @click="activeSection = 'projects'; mobileMenuOpen = false" class="block hover:underline py-2" :class="{'font-bold': activeSection === 'projects'}">Projects</a>
+          <a href="#publications" @click="activeSection = 'publications'; mobileMenuOpen = false" class="block hover:underline py-2" :class="{'font-bold': activeSection === 'publications'}">Publications</a>
+          <a href="#contact" @click="activeSection = 'contact'; mobileMenuOpen = false" class="block hover:underline py-2" :class="{'font-bold': activeSection === 'contact'}">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content - Adjusted for responsive layout -->
+  <main class="md:ml-72 p-4 md:p-8 space-y-8 md:space-y-12">
+    <!-- About -->
+    <section id="about" x-show="activeSection === 'about'">
+      <h2 class="text-3xl font-semibold mb-4">About Me</h2>
+      <p class="leading-relaxed text-lg" x-text="profile.bio"></p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" x-show="activeSection === 'projects'">
+      <h2 class="text-3xl font-semibold mb-6">Projects</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <template x-for="project in getPaginatedProjects()" :key="project.title">
+          <a :href="project.link" target="_blank"
+             class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-medium mb-2" x-text="project.title"></h3>
+            <p class="text-gray-700 dark:text-gray-300" x-text="project.description"></p>
+          </a>
+        </template>
+      </div>
+      <div class="flex justify-between mt-4">
+        <button @click="prevProjectsPage()" :disabled="projectsPage === 1" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded disabled:opacity-50">Previous</button>
+        <button @click="nextProjectsPage()" :disabled="projectsPage * itemsPerPage >= projects.length" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded disabled:opacity-50">Next</button>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" x-show="activeSection === 'publications'">
+      <h2 class="text-3xl font-semibold mb-6">Publications</h2>
+      <ul class="space-y-4">
+        <template x-for="pub in getPaginatedPublications()" :key="pub.doi">
+          <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow flex flex-col md:flex-row md:justify-between">
+            <div>
+              <a :href="pub.doi" class="text-lg font-medium hover:underline" target="_blank" x-text="pub.title"></a>
+              <p class="text-gray-600 dark:text-gray-400" x-text="pub.authors + ' — ' + pub.venue"></p>
+            </div>
+            <a :href="pub.pdf" target="_blank" class="mt-2 md:mt-0 text-blue-600 dark:text-blue-400 hover:underline">
+              [PDF]
+            </a>
+          </li>
+        </template>
+      </ul>
+      <div class="flex justify-between mt-4">
+        <button @click="prevPublicationsPage()" :disabled="publicationsPage === 1" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded disabled:opacity-50">Previous</button>
+        <button @click="nextPublicationsPage()" :disabled="publicationsPage * itemsPerPage >= publications.length" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded disabled:opacity-50">Next</button>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" x-show="activeSection === 'contact'">
+      <h2 class="text-3xl font-semibold mb-4">Contact</h2>
+      <p>
+        Email:
+        <a class="text-blue-600 dark:text-blue-400 hover:underline" :href="'mailto:' + profile.email" x-text="profile.email"></a>
+      </p>
+      <div class="flex space-x-4 mt-4">
+        <a :href="profile.social.twitter" target="_blank" class="hover:text-blue-400">Twitter</a>
+        <a :href="profile.social.github"  target="_blank" class="hover:text-gray-900 dark:hover:text-gray-100">GitHub</a>
+        <a :href="profile.social.linkedin" target="_blank" class="hover:text-blue-700">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Alpine.js Data Loader -->
+  <script>
+    const app = {
+      profile: {},
+      projects: [],
+      publications: [],
+      projectsPage: 1,
+      publicationsPage: 1,
+      itemsPerPage: 7,
+      activeSection: 'about',
+      async init() {
+        const res = await fetch('data.json');
+        const data = await res.json();
+        this.profile = data.profile;
+        this.projects = data.projects;
+        this.publications = data.publications;
+        document.title = `${this.profile.name} | Portfolio`;
+
+        // Check for system dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        }
+
+        // Set active section based on hash or default to about
+        const hash = window.location.hash.substring(1);
+        if (hash && ['about', 'projects', 'publications', 'contact'].includes(hash)) {
+          this.activeSection = hash;
+        } else {
+          this.activeSection = 'about';
+        }
+
+        // Listen for hash changes to update active section
+        window.addEventListener('hashchange', () => {
+          const hash = window.location.hash.substring(1);
+          if (hash && ['about', 'projects', 'publications', 'contact'].includes(hash)) {
+            this.activeSection = hash;
+          }
+        });
+      },
+      getPaginatedProjects() {
+        const start = (this.projectsPage - 1) * this.itemsPerPage;
+        const end = start + this.itemsPerPage;
+        return this.projects.slice(start, end);
+      },
+      getPaginatedPublications() {
+        const start = (this.publicationsPage - 1) * this.itemsPerPage;
+        const end = start + this.itemsPerPage;
+        return this.publications.slice(start, end);
+      },
+      nextProjectsPage() {
+        if (this.projectsPage * this.itemsPerPage < this.projects.length) {
+          this.projectsPage++;
+        }
+      },
+      prevProjectsPage() {
+        if (this.projectsPage > 1) {
+          this.projectsPage--;
+        }
+      },
+      nextPublicationsPage() {
+        if (this.publicationsPage * this.itemsPerPage < this.publications.length) {
+          this.publicationsPage++;
+        }
+      },
+      prevPublicationsPage() {
+        if (this.publicationsPage > 1) {
+          this.publicationsPage--;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
