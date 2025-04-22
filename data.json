@@ -1,66 +1,61 @@
 {
     "profile": {
-      "name": "Dr. Alice Bob",
-      "title": "Research Scientist",
+      "name": "Dr. Jeshua Tromp",
+      "title": "Cognitive Neuroscientist | Gut-Microbiome-Brain Interaction | Cognitive Control & Attention",
       "photo": "profile_picture.jpg",
-      "bio": "I am a research scientist specializing in machine learning and natural language processing. My work focuses on developing novel algorithms for understanding human language and improving human-computer interaction. I have published several papers in top-tier conferences and journals, and I collaborate with researchers across multiple disciplines.",
-      "email": "alice.bob.carol@example.com",
+      "bio": "Cognitive Neuroscientist with a background in psychology and neuroscience. Passionate about understanding the gut-brain axis and its implications for cognitive control and attention.",
+      "email": "jeshua(dot)tromp(at)live(dot)nl",
       "social": {
-        "twitter": "https://twitter.com/",
-        "github": "https://github.com/",
-        "linkedin": "https://linkedin.com/in/"
+        "substack": "https://hersenvoer.substack.com/",
+        "github": "https://github.com/JeshuaT",
+        "linkedin": "https://www.linkedin.com/in/jeshua-tromp-769552157/"
       }
     },
     "projects": [
       {
-        "title": "Neural Language Model",
-        "description": "Developed a state-of-the-art language model for text generation and understanding using transformer architecture.",
-        "link": "https://github.com/"
+        "title": "Postdoc project: Gut-microbiome-brain axis",
+        "description": "Investigate the link between the gut microbiome and brain function, focusing on how gut bacteria influence brain health and cognitive processes. Funded by the Hereditary project",
+        "link": "https://hereditary-project.eu/"
       },
       {
-        "title": "Computer Vision System",
-        "description": "Created an object detection system using deep learning for real-time analysis of video streams.",
-        "link": "https://github.com/"
+        "title": "PhD thesis: Neuromodulation of cognitive control",
+        "description": "Investigate the role of neuromodulators in cognitive control processes, including attention and decision-making. Funded by the NWO",
+        "link": "https://lnkd.in/e6HUVSqY "
       },
       {
-        "title": "Data Visualization Tool",
-        "description": "Built an interactive web-based tool for visualizing complex datasets using D3.js and React.",
-        "link": "https://github.com/"
-      },
-      {
-        "title": "Reinforcement Learning Framework",
-        "description": "Developed a framework for training agents to make decisions through reinforcement learning techniques.",
-        "link": "https://github.com/"
+        "title": "Hersenvoer",
+        "description": "Dutch blog about issues in science and health, with a focus on neuroscience and psychology. Funded by my coffee machine",
+        "link": "https://hersenvoer.substack.com/"
       }
     ],
     "publications": [
       {
-        "title": "Advances in Neural Language Models",
-        "authors": "J. Smith, A. Johnson, C. Williams",
-        "venue": "Journal of Machine Learning Research, 2023",
-        "doi": "https://doi.org/10.1234/jmlr.2023",
-        "pdf": "https://arxiv.org/pdf/2304.12345.pdf"
+        "title": "Phasic alertness generates urgency and amplifies competition between evidence accumulators",
+        "authors": "J Tromp, F Wurm, F Lucchi, R De Kleijn, S Nieuwenhuis",
+        "venue": "bioRxiv (not peer-reviewed), 2024",
+        "doi": "https://doi.org/10.1101/2024.06.18.599522",
+        "pdf": "https://www.biorxiv.org/content/10.1101/2024.06.18.599522v1.full.pdf"
       },
       {
-        "title": "Efficient Training Methods for Large Language Models",
-        "authors": "J. Smith, D. Brown",
-        "venue": "Conference on Neural Information Processing Systems, 2022",
-        "doi": "https://doi.org/10.5678/neurips.2022",
-        "pdf": "https://arxiv.org/pdf/2210.67890.pdf"
+        "title": "The effects of neural gain on reactive cognitive control",
+        "authors": "J Tromp, S Nieuwenhuis, P Murphy",
+        "venue": "Computational Brain & Behavior, 2022",
+        "doi": "https://doi.org/10.1007/s42113-022-00140-7",
+        "pdf": "https://link.springer.com/content/pdf/10.1007/s42113-022-00140-7.pdf"
       },
       {
-        "title": "Cross-Modal Learning for Visual Understanding",
-        "authors": "J. Smith, L. Davis, M. Wilson",
-        "venue": "International Conference on Computer Vision, 2021",
-        "doi": "https://doi.org/10.9012/iccv.2021",
-        "pdf": "https://arxiv.org/pdf/2103.12345.pdf"
+        "title": "Cognitive and brain development is independently influenced by socioeconomic status and polygenic scores for educational attainment",
+        "authors": "Nicholas Judd, Bruno Sauce, John Wiedenhoeft, Jeshua Tromp, Bader Chaarani, Alexander Schliep, Betteke van Noort, Jani Penttilä, Yvonne Grimmer, Corinna Insensee, Andreas Becker, Tobias Banaschewski, Arun LW Bokde, Erin Burke Quinlan, Sylvane Desrivières, Herta Flor, Antoine Grigis, Penny Gowland, Andreas Heinz, Bernd Ittermann, Jean-Luc Martinot, Marie-Laure Paillère Martinot, Eric Artiges, Frauke Nees, Dimitri Papadopoulos Orfanos, Tomáš Paus, Luise Poustka, Sarah Hohmann, Sabina Millenet, Juliane H Fröhner, Michael N Smolka, Henrik Walter, Robert Whelan, Gunter Schumann, Hugh Garavan, Torkel Klingberg",
+        "venue": "Proceedings of the National Academy of Sciences, 2020",
+        "doi": "https://doi.org/10.1073/pnas.2001228117",
+        "pdf": "https://www.pnas.org/doi/epdf/10.1073/pnas.2001228117"
       },
       {
-        "title": "A Survey of Reinforcement Learning Techniques",
-        "authors": "J. Smith, P. Miller",
-        "venue": "ACM Computing Surveys, 2020",
-        "doi": "https://doi.org/10.1145/3412345",
-        "pdf": "https://arxiv.org/pdf/2001.54321.pdf"
+        "title": "Identification of FAM173B as a protein methyltransferase promoting chronic pain",
+        "authors": "Hanneke LDM Willemen, Annemieke Kavelaars, Judith Prado, Mirjam Maas, Sabine Versteeg, Lara JJ Nellissen, Jeshua Tromp, Rafael Gonzalez Cano, Wenjun Zhou, Magnus E Jakobsson, Jędrzej Małecki, George Posthuma, Abdella M Habib, Cobi J Heijnen, Pål Ø Falnes, Niels Eijkelkamp",
+        "venue": "PLoS biology, 2018",
+        "doi": "https://doi.org/10.1371/journal.pbio.2003452",
+        "pdf": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.2003452&type=printable"
       }
     ]
   }
